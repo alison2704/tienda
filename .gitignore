@@ -1,0 +1,58 @@
+# ==============================
+#  PHP / Web Project .gitignore
+# ==============================
+
+# --- Archivos del entorno local ---
+.env
+.env.local
+.env.*.local
+
+# --- Configuración de XAMPP / Apache ---
+/htdocs/
+/xampp/
+/vendor/
+/composer.lock
+
+# --- Archivos del sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Archivos temporales y de caché ---
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
+*.cache
+*.session
+
+# --- Archivos de IDEs ---
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# --- Archivos de PHP ---
+# Archivos de caché o sesiones PHP
+*.session
+*.sess
+*.cache
+
+# --- Archivos de base de datos locales ---
+*.sql
+!tienda.sql 
+
+# --- Archivos de subida del usuario (si los hubiera) ---
+/uploads/
+/assets/img/temp/
+
+# --- Archivos generados automáticamente ---
+/node_modules/
+/dist/
+/build/
+
+# --- Sistema operativo (Windows / Mac) ---
+ehthumbs.db
+Icon?
