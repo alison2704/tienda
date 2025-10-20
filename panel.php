@@ -1,10 +1,13 @@
 <?php
-
+session_start();
 $nombre = $_POST['nombre'] ?? ($_COOKIE['c_nombre'] ?? '');
 $clave = $_POST['clave'] ?? ($_COOKIE['c_clave'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recordarme = isset($_POST['chkRecordarme']);
+
+    $_SESSION['usuario'] = $nombre;
+    $_SESSION['clave'] = $clave;
 
     if ($recordarme) {
         setcookie("c_nombre", $nombre, 0);
@@ -18,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } else {
+    if (!isset($_SESSION['usuario']) || !isset($_SESSION['clave'])) {
+        header('Location:index.php');
+    }
     $recordarme = isset($_COOKIE['c_recordarme']) && $_COOKIE['c_recordarme'];
 }
 
