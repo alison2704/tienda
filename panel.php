@@ -42,7 +42,8 @@ if (isset($_GET['idioma'])) {
 
 include('cnn.php');
 $tabla = ($idioma == 'en') ? 'productosen' : 'productoses';
-$sql = "SELECT nombre FROM $tabla";
+//$sql = "SELECT nombre FROM $tabla";
+$sql = "SELECT id, nombre FROM $tabla";
 $resultado = $conexion->query($sql);
 
 $titulo = ($idioma == 'en') ? 'Product List' : 'Lista de productos';
@@ -69,7 +70,9 @@ $titulo = ($idioma == 'en') ? 'Product List' : 'Lista de productos';
         echo "No hay registros";
     } else {
         while ($fila = $resultado->fetch_assoc()) {
-            echo $fila['nombre'] . "<br>";
+            $id = $fila['id'];
+            $nom = $fila['nombre'];
+            echo "<a href='producto.php?id=$id'>$nom</a><br>";
         }
     }
 
