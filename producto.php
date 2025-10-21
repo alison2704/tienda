@@ -7,7 +7,6 @@ $tabla = ($idioma === 'en') ? 'productosen' : 'productoses';
 
 $id = $_GET['id'];
 
-// Consultar producto por id
 $sql = "SELECT id, nombre, descripcion, precio FROM $tabla WHERE id = $id";
 $resultado = $conexion->query($sql);
 $producto = $resultado->fetch_assoc();
@@ -42,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_carro'])) {
 <h1><?php echo ($idioma === 'en') ? 'Product Details:' : 'Detalles del Producto:'; ?></h1>
 
 <h2><?php echo $producto['nombre']; ?></h2>
-<p><strong>ID:</strong> <?php echo $producto['id']; ?></p>
-<p><strong><?php echo ($idioma === 'en') ? 'Description:' : 'Descripción:'; ?></strong> <?php echo $producto['descripcion']; ?></p>
-<p><strong><?php echo ($idioma === 'en') ? 'Price:' : 'Precio:'; ?></strong> $<?php echo $producto['precio']; ?></p>
-
+<p><b>ID:</b> <?php echo $producto['id']; ?></p>
+<p><b><?php echo ($idioma === 'en') ? 'Description:' : 'Descripción:'; ?></b> <?php echo $producto['descripcion']; ?></p>
+<p><b><?php echo ($idioma === 'en') ? 'Price:' : 'Precio:'; ?></b> $<?php echo $producto['precio']; ?></p>
+    
 <form method="POST">
     <button type="submit" name="agregar_carro">Agregar al carrito</button>
 </form>
