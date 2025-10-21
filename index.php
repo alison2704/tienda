@@ -1,21 +1,11 @@
 <?php
-$nombre = $clave = $sexo = "";
-$preferencias = $esHombre = $esMujer = false;
-
+$nombre = $clave = "";
 if (isset($_COOKIE["c_recordarme"]) && $_COOKIE["c_recordarme"]) {
     $preferencias = true;
-    $nombre = $_COOKIE["c_nombre"];
-    $clave = $_COOKIE["c_clave"];
-    $sexp = $_COOKIE["c_sexo"];
-
-    if ($sexo = 'h') {
-        $esHombre = true;
-    } else {
-        $esMujer = true;
-    }
-    $esHombre = ($sexo == "h") ? true : false;
-    $esMujer = ($sexo == "m") ? true : false;
+    $nombre = $_COOKIE['c_nombre'];
+    $clave = $_COOKIE['c_clave'];
 }
+
 ?>
 
 <html>
@@ -27,9 +17,9 @@ if (isset($_COOKIE["c_recordarme"]) && $_COOKIE["c_recordarme"]) {
 
     <form action="panel.php" method="POST">
         <fieldset>
-            Usuario*:<br>
+            Usuario:<br>
             <input type="text" name="nombre" value="<?php echo $nombre ?>" id="" required><br>
-            Clave*:<br>
+            Clave:<br>
             <input type="password" name="clave" value="<?php echo $clave ?>" id="" required><br>
 
             <br>
@@ -39,6 +29,7 @@ if (isset($_COOKIE["c_recordarme"]) && $_COOKIE["c_recordarme"]) {
             <br>
 
             <input type="submit" value="Enviar">
+
         </fieldset>
     </form>
 </body>
