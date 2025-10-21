@@ -2,38 +2,45 @@
 // Aquí se inicia la sesión
 session_start();
 // Aquí se valida si la sesión está iniciada
-if( !isset($_SESSION['nombre']) && !isset($_SESSION['clave'])){
+if( !isset($_SESSION['usuario']) && !isset($_SESSION['clave'])){
     header("Location:index.php");
 }
+
+$idioma = (isset($_COOKIE['c_idioma']) && $_COOKIE['c_idioma'] === 'en') ? 'en' : 'es'; // Determina el idioma basado en la cookie
+$titulo = ($idioma == 'en') ? 'Shopping Cart' : 'Carrito de Compra';
+$bienvenido = ($idioma == 'en') ? 'Welcome' : 'Bienvenido';
+$instrucciones = ($idioma == 'en') ? 'List of products added to your cart during the session:' : 'Lista de productos agregados a su carrito durante la sesión:';
+$irpanel = ($idioma == 'en') ? 'Main Panel' : 'Panel Principal';
+$cerrarsesion = ($idioma == 'en') ? 'Close Session' : 'Cerrar Sesión';
+
 ?>
 
 <html>
-    <head>
-    </head>
-    <body>
-        <h1>Carrito de Compra</h1>
-        <h3>Usuario logeado: <?php echo $_SESSION["nombre"] ?></h3> <!-- Muestro el nombre de usuario almacenado en la sesión -->
-        <p><a href="panel.php">Ir a Mi Panel</a></p> <!-- Enlace a la página panel.php -->
-        <br>
-        <!-- Se debe utilizar un if para verificar si el usuario escogio la lista en español o ingles, utilizar la cookie de preferencia de idioma-->
-        <!-- ESPAÑOL -->
-        <h3>Lista de Productos Seleccionados en la Sesión: <?php echo $_SESSION["nombre"] ?></h3>
-        <!-- Aquí poner la lista de los productos en español almacenados en la sesion -->
-        <hr>
-        <p><a href="cerrarsesion.php">Cerrar Sesión</a></p> <!-- Enlace a la página cerrarsesion.php -->
-        <br>
-        <a href="borrarcookies.php?borrar=1">Borrar cookies y regresar</a> <!-- Enlace para borrar cookies y regresar -->
-        <br>
-        <a href="borrarcookies.php?borrar=0">Regresar</a> <!-- Enlace para regresar sin borrar cookies -->
+<head>
+</head>
+<body>
+<h1><?php echo $titulo ?></h1>
+<h3><?php echo $bienvenido; echo $_SESSION["usuario"] ?></h3> <!-- Muestro el nombre de usuario almacenado en la sesión -->
+<p><a href="panel.php"><?php echo $irpanel; ?></a></p> <!-- Enlace a la página panel.php -->
+<br>
+<h3> <?php echo $instrucciones; ?></h3>
 
-        <!-- INGLES -->
-        <h3>List of Products Selected in the Session: <?php echo $_SESSION["nombre"] ?></h3>
-        <!-- Aquí poner la lista de los productos en español almacenados en la sesion -->
-        <hr>
-        <p><a href="cerrarsesion.php">Close Session</a></p> <!-- Enlace a la página cerrarsesion.php -->
-        <br>
-        <a href="borrarcookies.php?borrar=1">Delete cookies and return</a> <!-- Enlace para borrar cookies y regresar -->
-        <br>
-        <a href="borrarcookies.php?borrar=0">Return</a> <!-- Enlace para regresar sin borrar cookies -->
-    </body>
+<?php
+if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) { // Verificar si el carrito existe y tiene productos
+    $carrito = $_SESSION['carrito']; // Obtener el carrito de la sesión
+    $total = 0;
+    foreach ($carrito as $producto) { // Iterar sobre los productos en el carrito
+        echo $producto['nombre'] . " (Cantidad: " . $producto['cantidad'] . ")<br>";
+        $total += $producto['precio'] * $producto['cantidad'];
+    }
+    echo "Total: $" . $total;
+} else {
+    echo ($idioma == 'en') ? 'Your cart is empty.' : 'Su carrito está vacío.';
+}
+?>
+<!-- Botones finales -->
+<hr>
+<p><a href="cerrarsesion.php"><?php echo $cerrarsesion; ?></a></p> <!-- Enlace a la página cerrarsesion.php -->
+
+</body>
 </html>
