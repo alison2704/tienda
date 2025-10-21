@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_carro'])) {
     if (!isset($_SESSION['carrito'])) {
         $_SESSION['carrito'] = [];
     }
+
     $id_producto = $producto['id'];
     // Agregar producto al carrito
     if (!isset($_SESSION['carrito'][$id_producto])) {
@@ -34,23 +35,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar_carro'])) {
 ?>
 
 <html>
+
 <head>
     <title>Producto</title>
 </head>
+
 <body>
 
-<h1><?php echo ($idioma === 'en') ? 'Product Details:' : 'Detalles del Producto:'; ?></h1>
+    <h1><?php echo ($idioma === 'en') ? 'Product Details:' : 'Detalles del Producto:'; ?></h1>
 
-<h2><?php echo $producto['nombre']; ?></h2>
-<p><strong>ID:</strong> <?php echo $producto['id']; ?></p>
-<p><strong><?php echo ($idioma === 'en') ? 'Description:' : 'Descripción:'; ?></strong> <?php echo $producto['descripcion']; ?></p>
-<p><strong><?php echo ($idioma === 'en') ? 'Price:' : 'Precio:'; ?></strong> $<?php echo $producto['precio']; ?></p>
+    <h2><?php echo $producto['nombre']; ?></h2>
+    <p><strong>ID:</strong> <?php echo $producto['id']; ?></p>
+    <p><strong><?php echo ($idioma === 'en') ? 'Description:' : 'Descripción:'; ?></strong>
+        <?php echo $producto['descripcion']; ?></p>
+    <p><strong><?php echo ($idioma === 'en') ? 'Price:' : 'Precio:'; ?></strong> $<?php echo $producto['precio']; ?></p>
 
-<form method="POST">
-    <button type="submit" name="agregar_carro">Agregar al carrito</button>
-</form>
+    <form method="POST">
+        <button type="submit" name="agregar_carro">Agregar al carrito</button>
+    </form>
 
-<a href="panel.php">Volver al Panel Principal</a><br>
-<a href="carro.php">Ir al carrito</a>
+    <a href="panel.php">Volver al Panel Principal</a><br>
+    <a href="carro.php">Ir al carrito</a>
 </body>
+
 </html>
