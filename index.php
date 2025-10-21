@@ -1,7 +1,6 @@
 <?php
 $nombre = $clave = "";
 if (isset($_COOKIE["c_recordarme"]) && $_COOKIE["c_recordarme"]) {
-    $preferencias = true;
     $nombre = $_COOKIE['c_nombre'];
     $clave = $_COOKIE['c_clave'];
 }

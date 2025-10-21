@@ -40,7 +40,8 @@ if (isset($_GET['idioma'])) {
     }
 }
 
-include('cnn.php');
+require_once 'cnn.php';
+
 $tabla = ($idioma == 'en') ? 'productosen' : 'productoses';
 //$sql = "SELECT nombre FROM $tabla";
 $sql = "SELECT id, nombre FROM $tabla";
@@ -79,10 +80,8 @@ $titulo = ($idioma == 'en') ? 'Product List' : 'Lista de productos';
     $conexion->close();
     ?>
 
-
     <a href="carro.php">Carrito de productos</a><br>
     <a href="cerrarsesion.php">Cerrar sesión</a><br>
-
 
 </body>
 
